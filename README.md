@@ -25,15 +25,25 @@ The scraper is configurable via a YAML file and includes proxy support, flexible
 ## 📁 Project Structure
 .
 ├── config.yaml # Configuration file
+
 ├── config_loader.py # YAML config loader
+
 ├── logger.py # Logging setup
+
 ├── main.py # Main script execution
+
 ├── scraper.py # Core scraping logic
+
 ├── logs/
+
 │ └── scraper.log # Log output (created automatically)
+
 ├── data/
+
 │ └── output.json # Output example
+
 ├── requirements.txt # Python dependencies
+
 └── README.md # This file
 
 ### 1. Install dependencies
