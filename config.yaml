@@ -6,5 +6,5 @@ output:
 
 proxy:
   use_proxy: false
-  http: ""
-  https: ""
+  http: "http://testuser:testpass@123.45.67.89:8080"
+  https: "http://134.209.29.120:3128"
