@@ -1,0 +1,10 @@
+scrape_interval_minutes: 5
+
+output:
+  format: json
+  path: "data/output.json"
+
+proxy:
+  use_proxy: false
+  http: ""
+  https: ""
