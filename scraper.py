@@ -3,8 +3,28 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from logger import setup_logger
 import undetected_chromedriver as uc
+import time
 
 logger = setup_logger()
+
+
+def scroll_to_bottom(driver, pause_time=1.0, max_scrolls=60):
+    last_height = driver.execute_script("return document.body.scrollHeight")
+    scrolls = 0
+
+    while scrolls < max_scrolls:
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(pause_time)
+        new_height = driver.execute_script("return document.body.scrollHeight")
+
+        if new_height == last_height:
+            break
+
+        last_height = new_height
+        scrolls += 1
+
+    logger.info(f"Finished scrolling after {scrolls} iterations.")
+
 
 def scrape_defillama_chains(proxy=None):
     options = uc.ChromeOptions()
@@ -26,8 +46,10 @@ def scrape_defillama_chains(proxy=None):
             EC.presence_of_element_located((By.CSS_SELECTOR, "div[style*='display: grid']"))
         )
         logger.info("Page loaded")
+        scroll_to_bottom(driver)
 
         grid_rows = driver.find_elements(By.CSS_SELECTOR, "div[style*='display: grid']")
+        logger.info(f"Found {len(grid_rows)} grid rows")
 
         result = []
         for row in grid_rows:
